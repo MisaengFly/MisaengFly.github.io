@@ -7,11 +7,11 @@ header {
 }
 
 .logo {
-    font-size: 3.65rem;
+    font-size: 4rem;
     font-weight: $base-font-weight-bold;
     color: var(--link-color);
     .logosvg {
-    	  height: 3.6rem;
+    	height: 4rem;
         -webkit-filter: var(--invert-logo-color);
     }
 }
@@ -23,6 +23,7 @@ header {
 	    list-style-type: none;
 	    margin-bottom: 0rem;
 	    padding: 0rem;
+	    width: fit-content;
 	  }
 	  li {
 	    display: inline-block;
