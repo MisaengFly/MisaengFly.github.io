@@ -10,9 +10,8 @@ header {
     font-size: 3.5rem;
     font-weight: $base-font-weight-bold;
     color: var(--link-color);
-
     .logosvg {
-    	  height: 3.5rem;
+    	  height: 4.0rem;
         -webkit-filter: var(--invert-logo-color);
     }
 }
