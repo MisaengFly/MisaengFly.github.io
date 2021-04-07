@@ -6,11 +6,11 @@ url                          : "http://misaengfly.github.io" # the base hostname
 
 blog:
   title                      : MisaengFly
-  description                  : >
-                               this should contain a proper description
+  description                : >
+                               Tech Blog
 
 # Layout configuration
-  logo_path                  : "assets/img/dactl.svg" # path to logo file
+  logo_path                  : "assets/img/bb8.png" # path to logo file
   search_path                : "misaengfly.github.io"
                                # needed for searchbox in archive page
   hero_layout                : true # turn on hero layout for blog and posts
