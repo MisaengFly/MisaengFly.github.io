@@ -12,12 +12,14 @@ header {
     color: var(--link-color);
     .logosvg {
     	height: 4rem;
+    	width: 4rem;
         -webkit-filter: var(--invert-logo-color);
     }
 }
 
 .menu {
     float: left;
+
 
 	  ul {
 	    list-style-type: none;
