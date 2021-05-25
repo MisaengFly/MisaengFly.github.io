@@ -14,7 +14,7 @@ sVoice is a recently introduced state-of-the-art speech separation technique by 
 the paper "Voice Separation with an Unknown Number of Multiple Speakers", successfully separates voices (or speeches)
 of multiple speakers in a single audio sequence.
 
-##Git Clone
+## Git Clone
 This post will briefly run through training the open source sVoice model, and introduce some of the
 challenges that I faced along the way. The sVoice github repository is available at:
 https://github.com/facebookresearch/svoice.
@@ -22,21 +22,21 @@ https://github.com/facebookresearch/svoice.
 Before anything else, let me mention that all of the following step were processed on a remote computing server.
 
 To start off, clone the sVoice repository. Cloning the repository will create a new folder named 'svoice'.
-~~~ruby 
+~~~js
 $git clone https://github.com/facebookresearch/svoice.git
 $cd svoice
 ~~~
 
-##Environment Setup
+## Environment Setup
 Now, let's install the dependencies following the instructions available on the sVoice repository.
-~~~ruby
+~~~js
 $pip install torch==1.6.0+cu101 torchvision==0.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 $pip install -r requirements.txt  
 ~~~
 
 Install the `NVIDIA CUDA toolkit` to make use of your gpu resources. Follow the developer document available (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
 Using a Linux (Ubuntu 16.04) environment, the following are the commands I ran to install the CUDA toolkit.
-~~~ruby
+~~~js
 $wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-ubuntu1604.pin
 $sudo mv cuda-ubuntu1604.pin /etc/apt/preferences.d/cuda-repository-pin-600
 $sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
@@ -51,7 +51,7 @@ This should do for setting up the environment for sVoice.
 The next part is to prepare a training dataset. You may choose to use your own dataset, but I will train my sVoice model
 with an opensource audio dataset LibriMix. If you want a quick toy project with minimal dataset, sVoice also offers a
 toy dataset.
-~~~ruby
+~~~js
 ./make_debug.sh
 ~~~
 
@@ -60,14 +60,14 @@ LibriMix is an dataset for speaker diarization with noise that combines LibriSpe
 WHAM datasets. You can find more info at: https://github.com/JorisCos/LibriMix. <br>
 
 To generate the LibriMix dataset, first clone the above repository and install `SoX`.
-~~~ruby
+~~~js
 $git clone https://github.com/JorisCos/LibriMix
 $sudo apt-get install sox
 ~~~
 
 Then you can adjust settings for your dataset by editing `generate_librimix.sh`. You may adjust the number of sources, 
 sample rate, noise, and mode (check repository for more detailed information) at the bottom of `generate_librimix.sh`. 
-~~~ruby
+~~~js
 $cd LibriMix 
 $vi ./generate_librimix.sh
 ~~~
@@ -77,11 +77,11 @@ you are looking for something simple. I changed my settings to 2 speakers, sampl
 shortest source ends), and mix_both (utterances + noise).
 
 If you are ready to generate your dataset, run `generate_librimix.sh`.
-~~~ruby
+~~~js
 $./generate_librimix.sh storage_dir
 ~~~
 If you are having permission issues running the file, try changing the file permissions before running the file.
-~~~ruby
+~~~js
 $chmod 755 ./generate_librimix.sh
 ~~~
 
@@ -90,7 +90,7 @@ Create three new directories `mix`, `s1`, `s2` and place your `mix_both`, `s1`, 
 
 For the dataset, we also need to generate a relevant JSON file in `svoice/egs`. Create a new directory `librimix` and 
 run `svoice.data.audio` to generate the JSON files. 
-~~~ruby
+~~~js
 !python -m svoice.data.audio dataset/librimix/mix > egs/librimix/mix.json
 !python -m svoice.data.audio dataset/librimix/s1 > egs/librimix/s1.json
 !python -m svoice.data.audio dataset/librimix/s2 > egs/librimix/s2.json
@@ -98,7 +98,7 @@ run `svoice.data.audio` to generate the JSON files.
 
 Next, go to `svoice/conf/dset/` and create a new yaml file for your dataset. Name your file `librimix.yaml`.
 Assign paths to your dataset and the JSON file. For my example, it should look like:
-~~~ruby
+~~~js
 # @package dset
 train: egs/librimix
 valid: egs/librimix
